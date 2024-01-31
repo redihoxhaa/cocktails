@@ -8,13 +8,13 @@ use Illuminate\Http\Request;
 
 class CocktailController extends Controller
 {
-    public function index(){
+    public function index()
+    {
 
-        $cocktails = Cocktail::all();
+        $cocktails = Cocktail::orderBy('name')->get();
 
 
 
-        return view('home',compact($cocktails));
-
+        return view('home', compact('cocktails'));
     }
 }
