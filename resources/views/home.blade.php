@@ -29,6 +29,12 @@
                                 </div>
                             </div>
                             <a href="{{ route('cocktails.edit', $cocktail) }}" class="btn btn-primary">Edit</a>
+                            <form action={{ route('cocktails.destroy', $cocktail->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button name="DELETE">Delete</button>
+
+                            </form>
                         </div>
 
                     </li>
