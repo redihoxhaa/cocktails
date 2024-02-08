@@ -33,6 +33,7 @@
             </ul>
         </div>
     </main>
+    <a class="btn btn-primary" href="{{ route('cocktails.create') }}">Create a new cocktail</a>
 @endsection
 
 @include('subs.footer')

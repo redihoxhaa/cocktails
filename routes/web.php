@@ -16,4 +16,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [CocktailController::class, 'index'])->name('home');
 
+Route::resource('cocktails',CocktailController::class);
+
 
