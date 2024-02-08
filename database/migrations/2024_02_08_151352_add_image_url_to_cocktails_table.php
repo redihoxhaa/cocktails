@@ -12,9 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('cocktails', function (Blueprint $table) {
-            $table->string('name', 50)->change();
-            $table->renameColumn('alcohol', 'is_alcoholic');
-            $table->float('alcohol_grade', 3, 1)->default(0)->change();
+            $table->text('thumb')->nullable();
         });
     }
 
@@ -24,9 +22,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('cocktails', function (Blueprint $table) {
-            $table->string('name', 20)->change();;
-            $table->renameColumn('is_alcoholic', 'alcohol');
-            $table->float('alcohol_grade', 3, 1)->change();
+            $table->dropColumn('thumb');
         });
     }
 };

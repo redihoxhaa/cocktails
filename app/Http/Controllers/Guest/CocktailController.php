@@ -16,8 +16,6 @@ class CocktailController extends Controller
 
         $cocktails = Cocktail::orderBy('name')->get();
 
-
-
         return view('home', compact('cocktails'));
     }
 
@@ -34,15 +32,38 @@ class CocktailController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Prendo i dati post
+        $data = $request->all();
+
+        // Creo nuova istanza fumetto
+        $cocktail = new Cocktail();
+
+        // Mappo i dati del form
+        $cocktail->name = $data['name'];
+        $cocktail->alcohol_grade = $data['alcohol_grade'];
+
+        if ($cocktail->alcohol_grade === "0") {
+            $cocktail->category = 'analcolico';
+            $cocktail->is_alcoholic = 0;
+        } else {
+            $cocktail->category = $data['category'];
+            $cocktail->is_alcoholic = 1;
+        }
+        $cocktail->thumb = $data['thumb'];
+
+        // Salvo l'istanza
+        $cocktail->save();
+
+        // Redirect alla pagina del nuovo fumetto (possiamo passare l'istanza in quanto la ricerca per id è automatica)
+        return redirect()->route('cocktails.show', $cocktail);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Cocktail $cocktail)
     {
-        //
+        return view('admin.show', compact('cocktail'));
     }
 
     /**

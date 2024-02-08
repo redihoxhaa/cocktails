@@ -7,12 +7,24 @@
 @import "_partials/variables.scss";
 @import "_partials/mixins.scss";
 
-.pic-container{
+.pic-container {
     width: 50px;
-  
+
+    img {
+        width: 100%;
+        display: block;
+    }
+
+}
+
+.single-cocktail {
+    .pic-container {
+        width: 100%;
+
         img {
             width: 100%;
             display: block;
         }
-    
+
+    }
 }
