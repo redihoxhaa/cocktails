@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateCocktailRequest extends FormRequest
 {
@@ -22,7 +23,12 @@ class UpdateCocktailRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => ['max:20', 'string'],
+            'is_alcoholic' => ['boolean'],
+            'alcohol_grade' => ['max:99'],
+            'category' => ['required', Rule::in(['dolce', 'secco', 'amaro', 'aspro', 'super alcolico']),],
+            'ingredients' => ['nullable', 'exists:ingredients,id'],
+            'thumb' => ['nullable', 'string']
         ];
     }
 }

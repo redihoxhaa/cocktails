@@ -42,8 +42,33 @@
                 <div class="mb-3">
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
-            </form>
+                <div class="mb-3">
+                    <div>
+                        <label class="form-label">ingredients</label>
+                    </div>
+                    @foreach ($ingredients as $ingredient)
+                        <div class="form-check form-check-inline">
+
+                            @if ($errors->any())
+                                <input class="form-check-input" type="checkbox" value="{{ $ingredient->id }}"
+                                    name="ingredients[]" id="ingredient-{{ $ingredient->id }}"
+                                    {{ in_array($ingredient->id, old('ingredients', [])) ? 'checked' : '' }}>
+                                <label class="form-check-label"
+                                    for="ingredient-{{ $ingredient->id }}">{{ $ingredient->name }}</label>
+                            @else
+                                <input class="form-check-input" type="checkbox" value="{{ $ingredient->id }}"
+                                    name="ingredients[]" id="ingredient-{{ $ingredient->id }}"
+                                    {{ $cocktail->ingredients->contains($ingredient->id) ? 'checked' : '' }}>
+                                <label class="form-check-label"
+                                    for="ingredient-{{ $ingredient->id }}">{{ $ingredient->name }}</label>
+                            @endif
+                        </div>
+                    @endforeach
+                </div>
+
         </div>
+        </form>
+
     </main>
 @endsection
 

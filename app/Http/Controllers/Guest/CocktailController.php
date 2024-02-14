@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Guest;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCocktailRequest;
+use App\Http\Requests\UpdateCocktailRequest;
 use App\Models\Cocktail;
 use App\Models\Ingredient;
 use Illuminate\Http\Request;
@@ -79,17 +80,18 @@ class CocktailController extends Controller
      */
     public function edit(Cocktail $cocktail)
     {
-        return view('admin.edit', compact('cocktail'));
+        $ingredients = Ingredient::all();
+        return view('admin.edit', compact('cocktail', 'ingredients'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Cocktail $cocktail)
+    public function update(UpdateCocktailRequest $request, Cocktail $cocktail)
     {
-        $data = $request->all();
 
-        $cocktail->update($data);
+
+        $data = $request->validated();
 
         $cocktail->name = $data['name'];
         $cocktail->alcohol_grade = $data['alcohol_grade'];
@@ -101,6 +103,13 @@ class CocktailController extends Controller
             $cocktail->category = $data['category'];
             $cocktail->is_alcoholic = 1;
         }
+
+        if ($request->has('ingredients')) {
+            $cocktail->ingredients()->sync($data['ingredients']);
+        } else {
+            $cocktail->ingredients()->sync([]);
+        }
+
         $cocktail->thumb = $data['thumb'];
 
         $cocktail->save();
@@ -113,6 +122,7 @@ class CocktailController extends Controller
      */
     public function destroy(Cocktail $cocktail)
     {
+        $cocktail->ingredients()->sync([]);
         $cocktail->delete();
 
         return redirect()->route('cocktails.index');
