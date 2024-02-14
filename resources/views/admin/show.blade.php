@@ -9,6 +9,7 @@
 @section('main')
     <main class="single-cocktail">
         <div class="container">
+            <a href="{{ route('cocktails.index') }}" class="btn btn-primary my-4">Torna ai cocktail</a>
             <div class="row">
                 <div class="col-6">
                     <div class="pic-container">
@@ -25,10 +26,8 @@
                     @else
                         <p class="badge bg-success p-2 text-uppercase">Analcoholic</p>
                     @endif
-                    @foreach ($cocktail->ingredients as $ingredient )
-
-                    <p class="">{{$ingredient['name']}}</p>
-                        
+                    @foreach ($cocktail->ingredients as $ingredient)
+                        <p class="">{{ $ingredient['name'] }}</p>
                     @endforeach
 
                 </div>

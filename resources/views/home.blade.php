@@ -9,12 +9,15 @@
 @section('main')
     <main>
         <div class="container">
+            <a href="{{ route('ingredients.index') }}" class="btn btn-primary my-4">Show Ingredients</a>
             <ul class="row">
                 @foreach ($cocktails as $cocktail)
                     <li class="col-4 py-2 px-3 d-flex">
                         <div class="card px-3 py-3 w-100 d-flex">
                             <div class="w-50">
-                                <h4>{{ $cocktail->name }}</h4>
+                                <a href="{{ route('cocktails.show', $cocktail) }}">
+                                    <h4>{{ $cocktail->name }}</h4>
+                                </a>
                                 <p>{{ $cocktail->category }}</p>
                                 <p>Gradazione alcoolica: {{ $cocktail->alcohol_grade }}%</p>
                                 @if ($cocktail->is_alcoholic === 1)

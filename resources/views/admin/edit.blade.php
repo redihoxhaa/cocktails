@@ -9,6 +9,17 @@
 @section('main')
     <main>
         <div class="container">
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+            <a href="{{ route('cocktails.index') }}" class="btn btn-primary my-4">Torna ai cocktail</a>
             <form action="{{ route('cocktails.update', $cocktail) }}" method="POST">
                 @csrf
                 @method('PATCH')

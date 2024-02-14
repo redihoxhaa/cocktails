@@ -15,7 +15,8 @@ class IngredientController extends Controller
      */
     public function index()
     {
-        //
+        $ingredients = Ingredient::all();
+        return view('admin.ingredients.index', compact('ingredients'));
     }
 
     /**
@@ -23,7 +24,7 @@ class IngredientController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.ingredients.create');
     }
 
     /**
@@ -39,7 +40,7 @@ class IngredientController extends Controller
      */
     public function show(Ingredient $ingredient)
     {
-        //
+        return view('admin.ingredients.show', compact('ingredient'));
     }
 
     /**
@@ -47,7 +48,7 @@ class IngredientController extends Controller
      */
     public function edit(Ingredient $ingredient)
     {
-        //
+        return view('admin.ingredients.edit', compact('ingredient'));
     }
 
     /**

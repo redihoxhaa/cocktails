@@ -9,6 +9,16 @@
 @section('main')
     <main>
         <div class="container">
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+            <a href="{{ route('cocktails.index') }}" class="btn btn-primary my-4">Torna ai cocktail</a>
             <form action="{{ route('cocktails.store') }}" method="POST">
                 @csrf
                 <div class="mb-3">
@@ -39,9 +49,11 @@
                     </div>
                     @foreach ($ingredients as $ingredient)
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" value="{{ $ingredient->id }}" name="ingredients[]"
-                                id="ingredient-{{ $ingredient->id }}" {{ in_array($ingredient->id, old('ingredients', [])) ? 'checked' : '' }}>
-                            <label class="form-check-label" for="ingredient-{{ $ingredient->id }}">{{ $ingredient->name }}</label>
+                            <input class="form-check-input" type="checkbox" value="{{ $ingredient->id }}"
+                                name="ingredients[]" id="ingredient-{{ $ingredient->id }}"
+                                {{ in_array($ingredient->id, old('ingredients', [])) ? 'checked' : '' }}>
+                            <label class="form-check-label"
+                                for="ingredient-{{ $ingredient->id }}">{{ $ingredient->name }}</label>
                         </div>
                     @endforeach
 
