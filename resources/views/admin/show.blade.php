@@ -25,6 +25,11 @@
                     @else
                         <p class="badge bg-success p-2 text-uppercase">Analcoholic</p>
                     @endif
+                    @foreach ($cocktail->ingredients as $ingredient )
+
+                    <p class="">{{$ingredient['name']}}</p>
+                        
+                    @endforeach
 
                 </div>
             </div>

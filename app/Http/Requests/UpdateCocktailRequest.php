@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreIngredientRequest extends FormRequest
+class UpdateCocktailRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,7 +22,7 @@ class StoreIngredientRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'tags' => ['nullable', 'exists:tags,id']
+            //
         ];
     }
 }

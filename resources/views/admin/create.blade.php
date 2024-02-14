@@ -34,6 +34,19 @@
                         id="exampleInputPassword1">
                 </div>
                 <div class="mb-3">
+                    <div>
+                        <label class="form-label">Ingredients</label>
+                    </div>
+                    @foreach ($ingredients as $ingredient)
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" value="{{ $ingredient->id }}" name="ingredients[]"
+                                id="ingredient-{{ $ingredient->id }}" {{ in_array($ingredient->id, old('ingredients', [])) ? 'checked' : '' }}>
+                            <label class="form-check-label" for="ingredient-{{ $ingredient->id }}">{{ $ingredient->name }}</label>
+                        </div>
+                    @endforeach
+
+                </div>
+                <div class="mb-3">
                     <label for="exampleInputPassword1" class="form-label">Insert an Image(URL)</label>
                     <input type="text" name="thumb" value="{{ old('thumb') }}" class="form-control"
                         id="exampleInputPassword1">

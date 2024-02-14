@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Guest;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreCocktailRequest;
 use App\Models\Cocktail;
+use App\Models\Ingredient;
 use Illuminate\Http\Request;
 
 class CocktailController extends Controller
@@ -24,16 +26,18 @@ class CocktailController extends Controller
      */
     public function create()
     {
-        return view('admin.create');
+        $ingredients = Ingredient::all();
+
+        return view('admin.create', compact('ingredients'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreCocktailRequest $request)
     {
         // Prendo i dati post
-        $data = $request->all();
+        $data = $request->validated();
 
         // Creo nuova istanza fumetto
         $cocktail = new Cocktail();
@@ -53,6 +57,10 @@ class CocktailController extends Controller
 
         // Salvo l'istanza
         $cocktail->save();
+
+        if (isset($data['ingredients'])) {
+            $cocktail->ingredients()->sync($data['ingredients']);
+        }
 
         // Redirect alla pagina del nuovo fumetto (possiamo passare l'istanza in quanto la ricerca per id è automatica)
         return redirect()->route('cocktails.show', $cocktail);

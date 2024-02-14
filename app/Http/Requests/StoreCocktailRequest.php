@@ -3,8 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class StoreIngredientRequest extends FormRequest
+class StoreCocktailRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,7 +23,13 @@ class StoreIngredientRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'tags' => ['nullable', 'exists:tags,id']
+
+            'name' => ['max:20', 'string'],
+            'is_alcoholic' => ['boolean'],
+            'alcohol_grade' => ['max:99'],
+            'category' => ['required', Rule::in(['dolce', 'secco', 'amaro', 'aspro', 'super alcolico']),],
+            'ingredients' => ['nullable', 'exists:ingredients,id'],
+            'thumb' => ['nullable', 'string']
         ];
     }
 }
