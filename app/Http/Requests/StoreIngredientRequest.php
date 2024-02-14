@@ -22,7 +22,8 @@ class StoreIngredientRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'tags' => ['nullable', 'exists:tags,id']
+            'name' => ['required', 'string'],
+            'slug' => ['nullable']
         ];
     }
 }

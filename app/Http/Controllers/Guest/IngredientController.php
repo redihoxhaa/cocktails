@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreIngredientRequest;
 use App\Http\Requests\UpdateIngredientRequest;
 use App\Models\Ingredient;
+use Illuminate\Support\Str;
 
 class IngredientController extends Controller
 {
@@ -32,7 +33,15 @@ class IngredientController extends Controller
      */
     public function store(StoreIngredientRequest $request)
     {
-        //
+        $data = $request->validated();
+
+        $ingredient = new Ingredient();
+        $ingredient->name = $data['name'];
+        $ingredient->slug = Str::slug($data['name']);
+
+        $ingredient->save();
+
+        return redirect()->route('ingredients.index');
     }
 
     /**
@@ -56,7 +65,14 @@ class IngredientController extends Controller
      */
     public function update(UpdateIngredientRequest $request, Ingredient $ingredient)
     {
-        //
+        $data = $request->validated();
+
+        $ingredient->name = $data['name'];
+        $ingredient->slug = Str::slug($data['name']);
+
+        $ingredient->save();
+
+        return redirect()->route('ingredients.index');
     }
 
     /**
@@ -64,6 +80,7 @@ class IngredientController extends Controller
      */
     public function destroy(Ingredient $ingredient)
     {
-        //
+        $ingredient->delete();
+        return redirect()->route('ingredients.index');
     }
 }

@@ -36,6 +36,7 @@
                         <option value="aspro" @if (old('category') == 'aspro') selected @endif>Aspro</option>
                         <option value="super alcolico" @if (old('category') == 'super alcolico') selected @endif>Super Alcolico
                         </option>
+                        <option value="analcolico" @if (old('category') == 'analcolico') selected @endif>Analcolico </option>
                     </select>
                 </div>
                 <div class="mb-3">

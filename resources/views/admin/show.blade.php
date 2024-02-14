@@ -23,8 +23,6 @@
 
                     @if ($cocktail->is_alcoholic === 1)
                         <p class="badge bg-danger p-2 text-uppercase">Alcoholic</p>
-                    @else
-                        <p class="badge bg-success p-2 text-uppercase">Analcoholic</p>
                     @endif
                     @foreach ($cocktail->ingredients as $ingredient)
                         <p class="">{{ $ingredient['name'] }}</p>

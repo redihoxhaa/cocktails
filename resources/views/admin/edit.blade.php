@@ -32,11 +32,12 @@
                     <label for="exampleInputPassword1" class="form-label">Cocktail Category</label>
                     <select class="form-select" name="category" aria-label="Default select example">
                         <option selected>Choose Category</option>
-                        <option value="dolce" @if (old('category') == 'dolce') selected @endif>Dolce</option>
-                        <option value="secco" @if (old('category') == 'secco') selected @endif>Secco</option>
-                        <option value="amaro" @if (old('category') == 'amaro') selected @endif>Amaro</option>
-                        <option value="aspro" @if (old('category') == 'aspro') selected @endif>Aspro</option>
-                        <option value="super alcolico" @if (old('category') == 'super alcolico') selected @endif>Super Alcolico
+                        <option value="dolce" @if (old('category', $cocktail->category) == 'dolce') selected @endif>Dolce</option>
+                        <option value="secco" @if (old('category', $cocktail->category) == 'secco') selected @endif>Secco</option>
+                        <option value="amaro" @if (old('category', $cocktail->category) == 'amaro') selected @endif>Amaro</option>
+                        <option value="aspro" @if (old('category', $cocktail->category) == 'aspro') selected @endif>Aspro</option>
+                        <option value="super alcolico" @if (old('category', $cocktail->category) == 'super alcolico') selected @endif>Super Alcolico
+                        <option value="analcolico" @if (old('category', $cocktail->category) == 'analcolico') selected @endif>Analcolico
                         </option>
                     </select>
                 </div>
