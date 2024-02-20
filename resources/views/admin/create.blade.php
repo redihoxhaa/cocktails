@@ -19,7 +19,7 @@
                 </div>
             @endif
             <a href="{{ route('cocktails.index') }}" class="btn btn-primary my-4">Torna ai cocktail</a>
-            <form action="{{ route('cocktails.store') }}" method="POST">
+            <form action="{{ route('cocktails.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Cocktail Name</label>
@@ -59,10 +59,10 @@
                     @endforeach
 
                 </div>
-                <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">Insert an Image(URL)</label>
-                    <input type="text" name="thumb" value="{{ old('thumb') }}" class="form-control"
-                        id="exampleInputPassword1">
+
+                <div class="input-group mb-3">
+                    <input type="file" class="form-control" id="thumb" name="thumb">
+                    <label class="input-group-text" for="thumb">Upload</label>
                 </div>
                 <div class="mb-3">
                     <button type="submit" class="btn btn-primary">Submit</button>

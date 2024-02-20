@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateCocktailRequest;
 use App\Models\Cocktail;
 use App\Models\Ingredient;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class CocktailController extends Controller
 {
@@ -54,7 +55,8 @@ class CocktailController extends Controller
             $cocktail->category = $data['category'];
             $cocktail->is_alcoholic = 1;
         }
-        $cocktail->thumb = $data['thumb'];
+
+        $cocktail->thumb = Storage::put('uploads', $data['thumb']);
 
         // Salvo l'istanza
         $cocktail->save();
@@ -110,7 +112,12 @@ class CocktailController extends Controller
             $cocktail->ingredients()->sync([]);
         }
 
-        $cocktail->thumb = $data['thumb'];
+        if ($request->hasFile('thumb')) {
+            if ($cocktail->thumb) {
+                Storage::delete($cocktail->thumb);
+            }
+            $cocktail->thumb = Storage::putFile('uploads', $data['thumb']);
+        }
 
         $cocktail->save();
 
@@ -123,6 +130,10 @@ class CocktailController extends Controller
     public function destroy(Cocktail $cocktail)
     {
         $cocktail->ingredients()->sync([]);
+
+        if ($cocktail->thumb) {
+            Storage::delete($cocktail->thumb);
+        }
         $cocktail->delete();
 
         return redirect()->route('cocktails.index');

@@ -15,7 +15,7 @@
                     <div class="cocktail-card mb-3">
                         <div class="row g-0">
                             <div class="col-md-4 img-container">
-                                <img src="@if ($cocktail->thumb) {{ $cocktail->thumb }}
+                                <img src="@if ($cocktail->thumb) {{ asset('storage/' . $cocktail->thumb) }}
                                     @else https://images.immediate.co.uk/production/volatile/sites/30/2023/04/Strawberry-Marg-c985252.jpg?quality=90&resize=556,505 @endif "
                                     alt="immagine" class="img_cocktail">
                             </div>

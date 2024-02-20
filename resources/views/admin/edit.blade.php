@@ -20,7 +20,7 @@
             @endif
 
             <a href="{{ route('cocktails.index') }}" class="btn btn-primary my-4">Torna ai cocktail</a>
-            <form action="{{ route('cocktails.update', $cocktail) }}" method="POST">
+            <form action="{{ route('cocktails.update', $cocktail) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PATCH')
                 <div class="mb-3">
@@ -46,13 +46,9 @@
                     <input type="number" name="alcohol_grade" value="{{ old('alcohol_grade', $cocktail->alcohol_grade) }}"
                         class="form-control" id="exampleInputPassword1">
                 </div>
-                <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">Insert an Image(URL)</label>
-                    <input type="text" name="thumb" value="{{ old('thumb', $cocktail->thumb) }}" class="form-control"
-                        id="exampleInputPassword1">
-                </div>
-                <div class="mb-3">
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                <div class="input-group mb-3">
+                    <input type="file" class="form-control" id="thumb" name="thumb">
+                    <label class="input-group-text" for="thumb">Upload</label>
                 </div>
                 <div class="mb-3">
                     <div>
@@ -76,6 +72,10 @@
                             @endif
                         </div>
                     @endforeach
+                </div>
+
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
 
         </div>

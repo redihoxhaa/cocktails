@@ -13,7 +13,7 @@
             <div class="row">
                 <div class="col-6">
                     <div class="pic-container">
-                        <img src="{{ $cocktail->thumb }}" alt="immagine {{ $cocktail->name }}">
+                        <img src="{{ asset('storage/' . $cocktail->thumb) }}" alt="immagine {{ $cocktail->name }}">
                     </div>
                 </div>
                 <div class="col-6">
