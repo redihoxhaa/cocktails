@@ -14,9 +14,10 @@
                 @foreach ($cocktails as $cocktail)
                     <div class="cocktail-card mb-3">
                         <div class="row g-0">
+
                             <div class="col-md-4 img-container">
                                 <img src="@if ($cocktail->thumb) {{ asset('storage/' . $cocktail->thumb) }}
-                                    @else https://images.immediate.co.uk/production/volatile/sites/30/2023/04/Strawberry-Marg-c985252.jpg?quality=90&resize=556,505 @endif "
+                                        @else https://images.immediate.co.uk/production/volatile/sites/30/2023/04/Strawberry-Marg-c985252.jpg?quality=90&resize=556,505 @endif "
                                     alt="immagine" class="img_cocktail">
                             </div>
                             <div class="col-md-8 p-4">
@@ -26,10 +27,10 @@
                                     </p>
                                     <h5 class="card-title">{{ $cocktail->name }}</h5>
                                     @if ($cocktail->is_alcoholic === 1)
-                                        <p class="badge text-bg-danger "> Vietato ai minori di 18 anni </p>
+                                        <p class="badge text-bg-danger m-0"> Vietato ai minori di 18 anni </p>
                                     @endif
                                 </div>
-                                <div class="d-flex gap-2">
+                                <div class="d-flex mt-2 gap-2">
                                     <a href="{{ route('cocktails.edit', $cocktail) }}" class="btn btn-primary">Edit</a>
                                     <form action="{{ route('cocktails.destroy', $cocktail->id) }}" method="POST">
                                         @csrf
@@ -37,8 +38,10 @@
                                         <button class="btn btn-danger" name="DELETE">Delete</button>
 
                                     </form>
+                                    <a href="{{ route('cocktails.show', $cocktail) }}" class="btn btn-success">Show</a>
                                 </div>
                             </div>
+
                         </div>
                     </div>
 

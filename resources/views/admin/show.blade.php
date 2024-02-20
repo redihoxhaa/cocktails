@@ -11,9 +11,11 @@
         <div class="container">
             <a href="{{ route('cocktails.index') }}" class="btn btn-primary my-4">Torna ai cocktail</a>
             <div class="row">
-                <div class="col-6">
+                <div class="col-6 ">
                     <div class="pic-container">
-                        <img src="{{ asset('storage/' . $cocktail->thumb) }}" alt="immagine {{ $cocktail->name }}">
+                        <img src="@if ($cocktail->thumb) {{ asset('storage/' . $cocktail->thumb) }}
+                        @else https://images.immediate.co.uk/production/volatile/sites/30/2023/04/Strawberry-Marg-c985252.jpg?quality=90&resize=556,505 @endif "
+                            alt="immagine"class="img-fluid rounded">
                     </div>
                 </div>
                 <div class="col-6">
