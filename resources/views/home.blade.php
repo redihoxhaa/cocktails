@@ -9,15 +9,12 @@
 @section('main')
     <main>
         <div class="container">
-            <a href="{{ route('ingredients.index') }}" class="btn btn-primary my-4">Show Ingredients</a>
             <ul class="row">
                 @foreach ($cocktails as $cocktail)
                     <li class="col-4 py-2 px-3 d-flex">
                         <div class="card px-3 py-3 w-100 d-flex">
                             <div class="w-50">
-                                <a href="{{ route('cocktails.show', $cocktail) }}">
-                                    <h4>{{ $cocktail->name }}</h4>
-                                </a>
+                                <h4>{{ $cocktail->name }}</h4>
                                 <p>{{ $cocktail->category }}</p>
                                 <p>Gradazione alcoolica: {{ $cocktail->alcohol_grade }}%</p>
                                 @if ($cocktail->is_alcoholic === 1)
@@ -32,7 +29,7 @@
                                 </div>
                             </div>
                             <a href="{{ route('cocktails.edit', $cocktail) }}" class="btn btn-primary">Edit</a>
-                            <form action={{ route('cocktails.destroy', $cocktail->id) }}" method="POST">
+                            <form action="{{ route('cocktails.destroy', $cocktail->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <button name="DELETE">Delete</button>
