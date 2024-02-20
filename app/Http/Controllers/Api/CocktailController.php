@@ -25,4 +25,20 @@ class CocktailController extends Controller
             'result' => $cocktails
         ]);
     }
+    
+    public function show(string $id){
+        $cocktail = Cocktail::with('ingredients')->where('id', $id)->first();
+
+        if (!$cocktail) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Cocktail not found'
+            ]);
+        }
+
+        return response()->json([
+            'status' => true,
+            'result' => $cocktail
+        ]);
+    }
 }

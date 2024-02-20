@@ -20,3 +20,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/cocktails', [CocktailController::class, 'index']);
+
+Route::get('/cocktails/{id}',[CocktailController::class,'show']);
